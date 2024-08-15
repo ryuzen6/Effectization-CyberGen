@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberGen - Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/static/images/background.webp');
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(5px);
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            filter: blur(0.5px);
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(28, 28, 28, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(128, 0, 128, 0.5);
+            max-width: 900px;
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            color: #800080;
+            margin-bottom: 20px;
+            font-size: 3em;
+            letter-spacing: 2px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border: 2px solid #800080;
+            border-radius: 10px;
+        }
+
+        .toggle-btn, .split-btn {
+            background-color: #800080;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .toggle-btn:hover, .split-btn:hover {
+            background-color: #4b0082;
+        }
+
+        .split-view-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .split-view img {
+            width: 50%;
+            border: 2px solid #000000;
+        }
+
+        .footer {
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: #800080;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Cyberpunk Image</h1>
+        {% if filename and input_filename %}
+            <div class="image-container">
+                <img id="inputImage" src="{{ url_for('static', filename='uploads/' + input_filename) }}" alt="Input Image">
+                <img id="outputImage" src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Generated Image" style="display: none;">
+            </div>
+            <div class="split-view-container" id="splitViewContainer" style="display: none;">
+                <div class="split-view">
+                    <img src="{{ url_for('static', filename='uploads/' + input_filename) }}" alt="Input Image">
+                    <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Generated Image">
+                </div>
+            </div>
+            <button class="toggle-btn" onclick="toggleImages()">Toggle Before/After</button>
+            <button class="split-btn" onclick="toggleSplitView()">Toggle Split View</button>
+        {% else %}
+            <p>No image was generated.</p>
+        {% endif %}
+        <div class="footer">
+            <a href="/">Generate Another Image</a>
+        </div>
+    </div>
+
+    <script>
+        let showingBefore = true;
+        let showingSplitView = false;
+
+        function toggleImages() {
+            const inputImage = document.getElementById('inputImage');
+            const outputImage = document.getElementById('outputImage');
+            const splitViewContainer = document.getElementById('splitViewContainer');
+
+            if (showingSplitView) {
+                splitViewContainer.style.display = 'none';
+                showingSplitView = false;
+            }
+
+            if (showingBefore) {
+                inputImage.style.display = 'none';
+                outputImage.style.display = 'block';
+            } else {
+                inputImage.style.display = 'block';
+                outputImage.style.display = 'none';
+            }
+            showingBefore = !showingBefore;
+        }
+
+        function toggleSplitView() {
+            const splitViewContainer = document.getElementById('splitViewContainer');
+            const inputImage = document.getElementById('inputImage');
+            const outputImage = document.getElementById('outputImage');
+
+            if (showingSplitView) {
+                splitViewContainer.style.display = 'none';
+                inputImage.style.display = showingBefore ? 'block' : 'none';
+                outputImage.style.display = showingBefore ? 'none' : 'block';
+            } else {
+                splitViewContainer.style.display = 'flex';
+                inputImage.style.display = 'none';
+                outputImage.style.display = 'none';
+            }
+            showingSplitView = !showingSplitView;
+        }
+    </script>
+</body>
+</html>

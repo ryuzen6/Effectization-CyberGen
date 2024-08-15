@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberGen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/static/images/background.webp');
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(5px);
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            filter: blur(0.5px);
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(28, 28, 28, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(128, 0, 128, 0.5);
+            max-width: 800px;
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            color: #800080;
+            margin-bottom: 20px;
+            font-size: 3em;
+            letter-spacing: 2px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="file"], input[type="submit"] {
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid #800080;
+            border-radius: 5px;
+            background-color: #1c1c1c;
+            color: #ffffff;
+            font-size: 1em;
+        }
+
+        input[type="file"] {
+            cursor: pointer;
+        }
+
+        input[type="submit"] {
+            cursor: pointer;
+            background-color: #800080;
+            color: #ffffff;
+            border: none;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4b0082;
+        }
+
+        .footer {
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: #800080;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CyberGen</h1>
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*">
+            <input type="submit" value="Generate Cyberpunk Image">
+        </form>
+        <div class="footer">
+            <a href="/result">See Results</a>
+        </div>
+    </div>
+</body>
+</html>
