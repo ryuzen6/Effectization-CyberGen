@@ -7,7 +7,7 @@ from stability_sdk import client
 from werkzeug.utils import secure_filename
 
 # Replace 'your-api-key-here' with your actual API key from Stability AI
-api_key = 'sk-LYgpMOm6Zf8Hc5UUXxkSheQ4TnGkmQ6SZA1r7tgbxTWU7U8D'
+api_key = 'your api key here'
 stability_api = client.StabilityInference(
     key=api_key,
     verbose=True
